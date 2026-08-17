@@ -14,13 +14,13 @@ Input-bar prompt optimizer for DeepSeek Harness (DSH): an **✨ Optimize** butto
 ## Install
 
 ```sh
-dsh plugin --profile web add dsh-prompt-polish
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.1.1
 ```
 
-Or install from GitHub, pinned to a tag:
+Or from npm (once published):
 
 ```sh
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.1.1
+dsh plugin --profile web add dsh-prompt-polish
 ```
 
 PowerShell one-liner (bootstraps pnpm, pins versions, self-checks):
