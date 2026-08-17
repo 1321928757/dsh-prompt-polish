@@ -1,0 +1,18 @@
+dsh-prompt-polish
+================
+
+This project is an independent, community-maintained DeepSeek Harness plugin.
+
+It evolved from "提示词优化 Prompt Optimizer" (ptopt-1, pkg-1 … pkg-11), a
+dynamic Cordis plugin prototyped and iterated inside the author's DeepSeek
+Harness sessions. The bundle form published in this repository is a faithful
+port of that v11 behavior:
+
+- strategy templates, voice rules and language fragments (lib/shared.js) are
+  kept byte-identical to pkg-11;
+- the client UI (lib/client.js) preserves the pkg-11 interaction model,
+  including the confirm dialog, last-5 history and three-tier settings
+  persistence.
+
+DeepSeek Harness and the @deepseek-ai/* packages are not affiliated with this
+project. All third-party trademarks belong to their respective owners.
