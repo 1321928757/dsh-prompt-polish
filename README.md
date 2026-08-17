@@ -51,6 +51,20 @@ Modes: **Default** (disambiguate and fix) / Concise / Structured (目标·背景
 
 **Output guarantee**: the result is always the user's first-person request to an AI — it never opens with "可以" / "好的" / "我来" and never answers the draft's questions. This is a fixed, byte-identical prompt red line.
 
+## Screenshots
+
+Composer with the ✨ Optimize button and the ⚙ settings toggle:
+
+![Composer with the Optimize button](assets/composer.png)
+
+Optimization result confirm dialog (Adopt / Keep draft / Later):
+
+![Optimization confirm dialog](assets/dialog.png)
+
+Settings panel (context toggles, mode, language, custom instructions, optimization history):
+
+![Settings panel](assets/settings.png)
+
 ## Settings persistence (three tiers)
 
 1. **L1 browser**: `localStorage` key `ptopt.settings.v1`, effective immediately;

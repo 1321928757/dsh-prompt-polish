@@ -51,6 +51,20 @@ dsh --profile web --dump-config | findstr dsh-prompt-polish
 
 **输出保证**：结果永远是「用户要发送给 AI 的第一人称请求」，不会以「可以」「好的」「我来」开头，也不会回答草稿中的问题——这是构建期提示词的红线，逐字节固定。
 
+## 截图
+
+输入栏的 ✨ 优化按钮与 ⚙ 设置入口：
+
+![输入栏优化按钮](assets/composer.png)
+
+优化结果确认弹窗（采用 / 保留原稿 / 稍后再看）：
+
+![优化确认弹窗](assets/dialog.png)
+
+设置面板（上下文开关、模式、语言、自定义指令、优化历史）：
+
+![设置面板](assets/settings.png)
+
 ## 设置持久化（三级）
 
 1. **L1 浏览器**：`localStorage` 键 `ptopt.settings.v1`，即时生效；
