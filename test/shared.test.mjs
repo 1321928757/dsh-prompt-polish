@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import {
   buildSystem,
+  classifyFinishReason,
   headTail,
   normalizeOptions,
   classifyHistoryItems,
@@ -115,4 +116,27 @@ test('classifyHistoryItems: 非数组输入返回空结构', () => {
   assert.equal(r.compactionItem, null)
   assert.deepEqual(r.summaryItems, [])
   assert.deepEqual(r.messageItems, [])
+})
+
+test('classifyFinishReason: stop/无 reason 视为正常完成', () => {
+  assert.equal(classifyFinishReason('stop', true).type, 'ok')
+  assert.equal(classifyFinishReason('stop', false).type, 'ok')
+  assert.equal(classifyFinishReason(undefined, true).type, 'ok')
+  assert.equal(classifyFinishReason(null, false).type, 'ok')
+})
+
+test('classifyFinishReason: max-tokens/length 有文本视为截断结果，无文本视为错误', () => {
+  const a = classifyFinishReason('max-tokens', true)
+  assert.equal(a.type, 'truncated')
+  const b = classifyFinishReason('length', true)
+  assert.equal(b.type, 'truncated')
+  const c = classifyFinishReason('max-tokens', false)
+  assert.equal(c.type, 'error')
+  assert.ok(String(c.message).length > 0)
+})
+
+test('classifyFinishReason: 未知 reason 保留原报错语义', () => {
+  const r = classifyFinishReason('content-filter', true)
+  assert.equal(r.type, 'error')
+  assert.ok(String(r.message).includes('content-filter'))
 })
