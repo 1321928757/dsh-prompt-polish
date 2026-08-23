@@ -2,11 +2,13 @@
 
 [English](README.md) | 中文
 
-DeepSeek Harness（DSH）输入栏提示词优化插件：一个 **✨ 优化** 按钮，一键把草稿重写为更清晰、更具体、更可执行的提示词，并可选携带当前会话的背景信息。
+DeepSeek Harness（DSH）输入栏提示词优化插件：一个 **优化** 按钮，一键把草稿重写为更清晰、更具体、更可执行的提示词，并可选携带当前会话的背景信息。
 
 - 6 种策略 × 3 种语言 + 自定义指令
 - 可选上下文：目标、任务清单、压缩摘要、工具结果、对话历史
-- 结果确认弹窗（采用 / 保留原稿 / 稍后再看），绝不静默覆盖草稿
+- 两级设置：轻量弹层（上下文开关 + 模式/语言）+ 完整设置弹窗（自定义指令、携带统计、历史、持久化说明）
+- 结果确认弹窗（采用优化结果 / 保留原稿 / 稍后再看），绝不静默覆盖草稿
+- 优化中可停止（spinner + 停止按钮），失败可重试，瞬时状态提示
 - 最近 5 次优化历史（回看 / 回填 / 删除）
 - 优化期间冻结输入框，双超时防卡死
 - 三级设置持久化（浏览器 L1 → 设置页行 L2 → 工作区文件 L3）
@@ -14,7 +16,7 @@ DeepSeek Harness（DSH）输入栏提示词优化插件：一个 **✨ 优化** 
 ## 安装
 
 ```sh
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.2.1
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.0
 ```
 
 或从 npm 安装（发布后可用）：
@@ -26,10 +28,10 @@ dsh plugin --profile web add dsh-prompt-polish
 PowerShell 一键安装（自动补齐 pnpm、固定版本、装完自检）：
 
 ```powershell
-irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.2.1/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.0/scripts/install.ps1 | iex
 ```
 
-装完重启 `dsh web`，输入栏左侧即出现 **✨ 优化** 按钮。验证：
+装完重启 `dsh web`，输入栏左侧即出现 **优化** 按钮。验证：
 
 ```sh
 dsh --profile web --dump-config | findstr dsh-prompt-polish
@@ -43,9 +45,9 @@ dsh --profile web --dump-config | findstr dsh-prompt-polish
 
 | 入口 | 功能 |
 | --- | --- |
-| 输入栏 **✨ 优化** | 按当前策略重写草稿；📖 开关开启时携带会话背景 |
-| 输入栏 **⚙** | 设置面板：📖 上下文开关、🔧 工具结果开关、模式、语言、自定义指令、优化历史、本次携带统计 |
-| 设置页「📖 参考聊天记录上下文」 | L2 设置行，与面板开关联动 |
+| 输入栏 **优化** | 按当前策略重写草稿；开启「参考聊天记录上下文」时携带会话背景；优化中按钮变为 **停止** 可取消 |
+| 输入栏 **设置齿轮** | 轻量设置弹层：上下文开关、工具结果开关、模式、语言，以及「打开完整设置」 |
+| 设置页「参考聊天记录上下文」 | L2 设置行，与弹层开关联动 |
 
 模式：**默认**（消歧修正）/ 压缩精简 / 结构化（目标·背景·要求·期望输出）/ 创意扩展 / 翻译 / 代码请求。语言：跟随原文 / 中文 / 英文（翻译模式下为目标语言）。
 
@@ -53,7 +55,7 @@ dsh --profile web --dump-config | findstr dsh-prompt-polish
 
 ## 截图
 
-输入栏的 ✨ 优化按钮与 ⚙ 设置入口：
+输入栏的 优化 按钮与 设置齿轮 入口：
 
 ![输入栏优化按钮](assets/composer.png)
 
