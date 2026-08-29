@@ -16,7 +16,7 @@ Input-bar prompt optimizer for DeepSeek Harness (DSH): an **Optimize** button th
 ## Install
 
 ```sh
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.0
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.1
 ```
 
 Or from npm (once published):
@@ -28,7 +28,7 @@ dsh plugin --profile web add dsh-prompt-polish
 PowerShell one-liner (bootstraps pnpm, pins versions, self-checks):
 
 ```powershell
-irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.0/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.1/scripts/install.ps1 | iex
 ```
 
 Restart `dsh web` and the **Optimize** button appears on the left of the composer. Verify:

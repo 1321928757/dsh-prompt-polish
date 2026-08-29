@@ -16,7 +16,7 @@ DeepSeek Harness（DSH）输入栏提示词优化插件：一个 **优化** 按�
 ## 安装
 
 ```sh
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.0
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.1
 ```
 
 或从 npm 安装（发布后可用）：
@@ -28,7 +28,7 @@ dsh plugin --profile web add dsh-prompt-polish
 PowerShell 一键安装（自动补齐 pnpm、固定版本、装完自检）：
 
 ```powershell
-irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.0/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.1/scripts/install.ps1 | iex
 ```
 
 装完重启 `dsh web`，输入栏左侧即出现 **优化** 按钮。验证：
