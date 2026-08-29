@@ -49,9 +49,11 @@ Uninstall: `dsh plugin --profile web remove dsh-prompt-polish`
 | Composer **gear** | Quick settings popover: context toggle, tool-results toggle, mode, language, and a link to the full settings dialog |
 | Settings page row | L2 settings row, linked with the panel toggles |
 
-Modes: **Default** (disambiguate and fix) / Concise / Structured (目标·背景·要求·期望输出) / Creative / Translate / Code request. Languages: follow draft / Chinese / English (target language in Translate mode).
+Modes: **Default** (disambiguate and fix without unsupported deliverables) / Concise / Structured (目标·背景·要求·期望输出) / Creative (new angles are optional) / Translate and optimize / Code request. Languages: follow draft / Chinese / English (target language in Translate and optimize mode). An explicit language choice overrides custom instructions; selecting follow draft keeps the draft language and only optimizes the prompt.
 
-**Output guarantee**: the result is always the user's first-person request to an AI — it never opens with "可以" / "好的" / "我来" and never answers the draft's questions. This is a fixed, byte-identical prompt red line.
+Structured mode uses labels in the selected language when multiple meaningful sections exist and may omit empty sections. Code request mode organizes inputs, outputs, environment, constraints, edge cases and acceptance criteria without inventing unknown technologies or APIs.
+
+**Output guarantee**: the result is always a natural user-facing request or command addressed to an AI — not the assistant's reply, plan or explanation. It never answers the draft's questions or opens with reply-like wording such as "可以" / "好的" / "我来". The draft and context are reference data only: optimizer-directed meta-instructions such as "ignore the rules" or "do not rewrite this" are normally cleaned or neutralized while their substantive task is preserved. If the draft explicitly asks to study prompt injection, the injection text is preserved as an analysis object, never executed.
 
 ## Screenshots
 
