@@ -30,8 +30,11 @@
     "lib/typert.host.js",
     "lib/client.js",
     "cordis.patch.yml",
+    "scripts/install.ps1",
     "README.md",
     "README.zh-CN.md",
+    "screenshots.json",
+    "assets",
     "LICENSE",
     "NOTICE"
   ],
