@@ -24,7 +24,7 @@ DeepSeek Harness（DSH）输入栏提示词优化插件。点击 **优化**，�
 - 失败结果会保留原稿并显示失败原因，支持 **重试**。
 - 当前挂载组件内保存最近五次优化尝试。成功记录可查看或显式回填到输入栏；失败记录也会保留为失败记录。
 - 设置会保存到本地，并尽力同步到工作区文件。
-- 浏览器 UI 使用 DSH 主题令牌，跟随亮/暗主题，并支持键盘焦点、Escape/点击外部关闭、减少动效和高对比度边框。
+- 浏览器 UI 使用 DSH 主题令牌，跟随亮/暗主题，并支持键盘焦点、Escape/点击外部关闭、减少动效和高对比度边框。输入栏控件保持低噪声：**优化**按钮静止时透明，仅在悬浮、聚焦或按下时显示宿主交互背景，文字颜色也会贴近相邻 DSH 控件并降低强调度。
 
 ## 模式与语言行为
 
@@ -71,7 +71,7 @@ DeepSeek Harness（DSH）输入栏提示词优化插件。点击 **优化**，�
 以下命令会将当前文档对应的版本安装到 `web` profile：
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.1
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.2
 ```
 
 安装后重启现有的 DSH Web 进程，再检查 profile 组合：
@@ -87,10 +87,10 @@ dsh --profile web --dump-config | findstr dsh-prompt-polish
 仓库中的安装脚本通过再次执行 `dsh plugin ... add`，让已安装版本对齐脚本固定的 tag。也可以手动使用想要的发布 tag：
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.1
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.2
 ```
 
-将 `v0.3.1` 替换为更新的已发布 tag，然后重启该 profile 的 DSH Web 进程，并重新执行 `--dump-config` 检查。
+将 `v0.3.2` 替换为更新的已发布 tag，然后重启该 profile 的 DSH Web 进程，并重新执行 `--dump-config` 检查。
 
 ### 从 npm 安装
 
@@ -105,7 +105,7 @@ dsh plugin --profile web add dsh-prompt-polish
 仓库包含一个固定版本安装脚本：
 
 ```powershell
-irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.1/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.2/scripts/install.ps1 | iex
 ```
 
 执行远程 `irm | iex` 前请先审阅脚本。脚本会检查 `dsh`，确保 pnpm 可用，固定使用 pnpm `11.21.0`；有 Git 时优先使用 Git，没有 Git 时回退到 GitHub tag 压缩包；默认将固定版本安装到 `web` profile。它可能通过 Corepack 激活 pnpm，或通过 npm 全局安装 pnpm。下载后运行脚本时可传入 `-Profile <name>`；如果使用其他 profile，请在重启、验证和卸载命令中使用相同的 profile。
@@ -114,7 +114,7 @@ irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.1/script
 
 ```powershell
 $path = Join-Path $PWD install.ps1
-Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.1/scripts/install.ps1 -OutFile $path
+Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.2/scripts/install.ps1 -OutFile $path
 Get-Content $path
 powershell -NoProfile -ExecutionPolicy Bypass -File $path -Profile web
 ```
@@ -154,7 +154,7 @@ dsh --profile demo --dump-config
 
 ### 输入栏入口
 
-**优化**按钮和设置齿轮注册在 `conversation.input.left` 槽位：
+**优化**按钮和设置齿轮注册在 `conversation.input.left` 槽位。当前 UI 中，按钮静止时保持透明并使用更淡的文字；悬浮或聚焦时才显示宿主交互背景，不再保留持续性的高亮：
 
 ![输入栏优化按钮](https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/main/assets/composer.png)
 

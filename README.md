@@ -24,7 +24,7 @@ A composer-side prompt optimizer for DeepSeek Harness (DSH). Click **Optimize** 
 - Failure results stay visible with the original draft and a **Retry** action.
 - A current-component, in-memory history of the last five optimization attempts. Successful entries can be reviewed or explicitly refilled into the composer; failed entries are retained as failure records.
 - Settings are saved locally and best-effort synchronized to a workspace file.
-- The browser UI uses DSH theme tokens and supports light/dark themes, keyboard focus, Escape/outside-click dismissal, reduced motion, and high-contrast borders.
+- The browser UI uses DSH theme tokens and supports light/dark themes, keyboard focus, Escape/outside-click dismissal, reduced motion, and high-contrast borders. The composer controls stay quiet at rest: **Optimize** is transparent when idle and gains a host interactive surface only on hover, focus, or press, with lighter label text matching adjacent DSH controls.
 
 ## Modes and language behavior
 
@@ -71,7 +71,7 @@ This plugin is a browser composer extension, not a standalone shell command or a
 The primary path installs the currently documented tag into the `web` profile:
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.1
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.2
 ```
 
 Restart the existing DSH Web process after installation. Then verify the profile composition:
@@ -87,10 +87,10 @@ After the restart, the **Optimize** button and gear should appear on the left si
 The repository's installer aligns an existing installation by running `dsh plugin ... add` again. You can use the same approach manually with the release tag you want:
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.1
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.2
 ```
 
-Replace `v0.3.1` with a newer published tag, then restart that profile's DSH Web process and repeat the `--dump-config` check.
+Replace `v0.3.2` with a newer published tag, then restart that profile's DSH Web process and repeat the `--dump-config` check.
 
 ### Install from npm
 
@@ -105,7 +105,7 @@ dsh plugin --profile web add dsh-prompt-polish
 The repository contains a pinned installer:
 
 ```powershell
-irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.1/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.2/scripts/install.ps1 | iex
 ```
 
 Review the script before executing a remote `irm | iex` command. It checks for `dsh`, ensures pnpm is available, pins pnpm `11.21.0`, prefers Git when available, falls back to the GitHub tag archive when Git is unavailable, and installs the pinned release into the `web` profile by default. It may activate pnpm through Corepack or install it globally through npm. The script accepts `-Profile <name>` when run from a downloaded file; when using another profile, use that profile in your own restart, verification, and removal commands.
@@ -114,7 +114,7 @@ To inspect it before running:
 
 ```powershell
 $path = Join-Path $PWD install.ps1
-Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.1/scripts/install.ps1 -OutFile $path
+Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.2/scripts/install.ps1 -OutFile $path
 Get-Content $path
 powershell -NoProfile -ExecutionPolicy Bypass -File $path -Profile web
 ```
@@ -154,7 +154,7 @@ The screenshots use published GitHub Raw URLs so they render in GitHub, npm, and
 
 ### Composer entry
 
-The **Optimize** button and gear are registered in the composer's `conversation.input.left` slot:
+The **Optimize** button and gear are registered in the composer's `conversation.input.left` slot. In the current UI, the idle trigger is transparent and uses lighter label text; hovering or focusing it reveals the host interactive surface without adding a permanent highlight:
 
 ![Composer with the Optimize button](https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/main/assets/composer.png)
 
