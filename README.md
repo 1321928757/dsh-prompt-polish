@@ -60,8 +60,8 @@ This plugin is a browser composer extension, not a standalone shell command or a
 ## Requirements and compatibility
 
 - DeepSeek Harness with a compatible Web profile that provides the plugin's Host and browser dependencies.
-- The package peer ranges currently target `@deepseek-ai/cordis ^4.0.1`, `@deepseek-ai/cordis-plugin-timer ^1.1.3`, the DSH `0.1.0-rc.6` service/client packages listed in `package.json`, and React `^18.2.0`. The package directly depends on `zod ^4.4.3`.
-- Node.js **20 or newer** is the prerequisite reported by the installer and DSH setup. This package does not declare an `engines` field.
+- **DSH 0.2.0-rc.2 or newer, below 0.3.0.** Version 0.4.0 migrates both Host and Client Typert strict codecs to the DSH 0.2 `create()` factory contract. It no longer supports DSH 0.1.x; use plugin 0.3.2 there.
+- The package targets `@deepseek-ai/cordis ~4.0.4`, the DSH `0.2.0-rc.2` service packages listed in `package.json`, and React `^18.2.0`; it directly depends on `zod ^4.4.3`. The package declares Node.js `>=20`.
 - A configured DSH model provider is required for optimization. Provider availability, model limits, network access, and provider policy remain outside this package.
 
 ## Install, update, or remove
@@ -71,7 +71,7 @@ This plugin is a browser composer extension, not a standalone shell command or a
 The primary path installs the currently documented tag into the `web` profile:
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.2
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.4.0
 ```
 
 Restart the existing DSH Web process after installation. Then verify the profile composition:
@@ -87,10 +87,10 @@ After the restart, the **Optimize** button and gear should appear on the left si
 The repository's installer aligns an existing installation by running `dsh plugin ... add` again. You can use the same approach manually with the release tag you want:
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.3.2
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.4.0
 ```
 
-Replace `v0.3.2` with a newer published tag, then restart that profile's DSH Web process and repeat the `--dump-config` check.
+Replace `v0.4.0` with a newer published tag, then restart that profile's DSH Web process and repeat the `--dump-config` check.
 
 ### Install from npm
 
@@ -105,7 +105,7 @@ dsh plugin --profile web add dsh-prompt-polish
 The repository contains a pinned installer:
 
 ```powershell
-irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.2/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.4.0/scripts/install.ps1 | iex
 ```
 
 Review the script before executing a remote `irm | iex` command. It checks for `dsh`, ensures pnpm is available, pins pnpm `11.21.0`, prefers Git when available, falls back to the GitHub tag archive when Git is unavailable, and installs the pinned release into the `web` profile by default. It may activate pnpm through Corepack or install it globally through npm. The script accepts `-Profile <name>` when run from a downloaded file; when using another profile, use that profile in your own restart, verification, and removal commands.
@@ -114,7 +114,7 @@ To inspect it before running:
 
 ```powershell
 $path = Join-Path $PWD install.ps1
-Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.3.2/scripts/install.ps1 -OutFile $path
+Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.4.0/scripts/install.ps1 -OutFile $path
 Get-Content $path
 powershell -NoProfile -ExecutionPolicy Bypass -File $path -Profile web
 ```
