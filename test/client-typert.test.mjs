@@ -44,6 +44,10 @@ const materialized = bootEntries[0].factory((specifier) => {
 })
 assert.deepEqual(materialized.inject, ['remote'])
 assert.equal(typeof materialized.apply, 'function')
+assert.match(source, /\.dyn-opt-dialog\s*\{[\s\S]*?background:var\(--pp-modal-surface, var\(--dsw-alias-bg-layer-2, #fff\)\)/)
+assert.match(source, /\.dyn-opt-dialog-body\s*\{[\s\S]*?background:var\(--pp-modal-surface, var\(--dsw-alias-bg-layer-2, #fff\)\)/)
+assert.match(source, /\.dyn-opt-dialog-foot\s*\{[\s\S]*?background:var\(--pp-modal-footer, var\(--pp-modal-surface, #fff\)\)/)
+assert.match(source, /\.dyn-opt-pop\s*\{[\s\S]*?background:var\(--dsw-specific-menu, var\(--pp-surface-raised\)\)/)
 
 function validateCodec(codec, subject) {
   assert.equal(typeof codec, 'object', `${subject} codec must be an object`)

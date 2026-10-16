@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1] - 2026-10-12
+
+### Fixed
+- Make the full prompt-polish settings modal opaque and theme-aware under DSH 0.2, preventing the conversation behind it from showing through the form.
+- Keep the lightweight composer settings popover's existing translucent appearance unchanged.
+- Add a Client style regression check for the modal surface and popover boundary.
+
 ## [0.4.0] - 2026-10-12
 
 ### Breaking

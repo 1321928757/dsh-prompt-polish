@@ -60,7 +60,7 @@ DeepSeek Harness（DSH）输入栏提示词优化插件。点击 **优化**，�
 ## 环境要求与兼容性
 
 - 需要提供插件 Host 和浏览器依赖的兼容 DSH Web profile。
-- **需要 DSH 0.2.0-rc.2 及以上、低于 0.3.0。** 插件 0.4.0 将 Host 与 Client 两侧 Typert strict codec 迁移到 DSH 0.2 的 `create()` factory 契约，不再支持 DSH 0.1.x；0.1.x 环境请使用插件 0.3.2。
+- **需要 DSH 0.2.0-rc.2 及以上、低于 0.3.0。** 插件 0.4.1 保留 DSH 0.2 的 Typert 迁移并修复完整设置页背景；插件 0.4.0 首次将 Host 与 Client 两侧 Typert strict codec 迁移到 DSH 0.2 的 `create()` factory 契约，不再支持 DSH 0.1.x；0.1.x 环境请使用插件 0.3.2。
 - 当前包以 `@deepseek-ai/cordis ~4.0.4`、`package.json` 中列出的 DSH `0.2.0-rc.2` 服务包以及 React `^18.2.0` 为目标，并直接依赖 `zod ^4.4.3`；包声明 Node.js `>=20`。
 - 优化必须有可用的 DSH 模型提供商。提供商可用性、模型限制、网络访问和提供商政策不属于本插件控制范围。
 
@@ -71,7 +71,7 @@ DeepSeek Harness（DSH）输入栏提示词优化插件。点击 **优化**，�
 以下命令会将当前文档对应的版本安装到 `web` profile：
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.4.0
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.4.1
 ```
 
 安装后重启现有的 DSH Web 进程，再检查 profile 组合：
@@ -87,10 +87,10 @@ dsh --profile web --dump-config | findstr dsh-prompt-polish
 仓库中的安装脚本通过再次执行 `dsh plugin ... add`，让已安装版本对齐脚本固定的 tag。也可以手动使用想要的发布 tag：
 
 ```powershell
-dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.4.0
+dsh plugin --profile web add github:1321928757/dsh-prompt-polish#v0.4.1
 ```
 
-将 `v0.4.0` 替换为更新的已发布 tag，然后重启该 profile 的 DSH Web 进程，并重新执行 `--dump-config` 检查。
+将 `v0.4.1` 替换为更新的已发布 tag，然后重启该 profile 的 DSH Web 进程，并重新执行 `--dump-config` 检查。
 
 ### 从 npm 安装
 
@@ -105,7 +105,7 @@ dsh plugin --profile web add dsh-prompt-polish
 仓库包含一个固定版本安装脚本：
 
 ```powershell
-irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.4.0/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.4.1/scripts/install.ps1 | iex
 ```
 
 执行远程 `irm | iex` 前请先审阅脚本。脚本会检查 `dsh`，确保 pnpm 可用，固定使用 pnpm `11.21.0`；有 Git 时优先使用 Git，没有 Git 时回退到 GitHub tag 压缩包；默认将固定版本安装到 `web` profile。它可能通过 Corepack 激活 pnpm，或通过 npm 全局安装 pnpm。下载后运行脚本时可传入 `-Profile <name>`；如果使用其他 profile，请在重启、验证和卸载命令中使用相同的 profile。
@@ -114,7 +114,7 @@ irm https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.4.0/script
 
 ```powershell
 $path = Join-Path $PWD install.ps1
-Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.4.0/scripts/install.ps1 -OutFile $path
+Invoke-WebRequest https://raw.githubusercontent.com/1321928757/dsh-prompt-polish/v0.4.1/scripts/install.ps1 -OutFile $path
 Get-Content $path
 powershell -NoProfile -ExecutionPolicy Bypass -File $path -Profile web
 ```

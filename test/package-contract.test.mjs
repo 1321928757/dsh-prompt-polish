@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 const manifest = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'))
 const lock = readFileSync(new URL('../pnpm-lock.yaml', import.meta.url), 'utf8')
 
-assert.equal(manifest.version, '0.4.0')
+assert.equal(manifest.version, '0.4.1')
 assert.deepEqual(manifest.engines, { dsh: '>=0.2.0-rc.2 <0.3.0', node: '>=20' })
 assert.equal(manifest.dsh.client.platform, 'web')
 assert.ok(manifest.files.includes('lib/typert.host.js'))
