@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.4.3] - 2026-11-16
+
+### Fixed
+- 修复「打开完整设置」后弹窗与输入栏互相穿插：完整设置弹窗改经 `react-dom` 的 `createPortal` 挂载到 `document.body`，`z-index` 提到顶层（`2147483000`，与仓库内其他 DSH 插件一致）。此前弹窗在输入栏槽位子树内使用 `position:fixed`，受宿主输入栏层叠上下文约束，弹窗中部会被输入栏按钮压住、遮罩也压不住宿主 chrome。`react-dom` 解析失败时回退为就地渲染，不至于整块 UI 崩溃。
+- 主题变量 `--pp-*` 同时挂到 `.dyn-opt-root` 与 `.dyn-opt-dialog-backdrop`：portal 之后弹窗不再是插件根节点后代，否则卡片、页头、页脚会丢失配色。
+- `@supports not (color-mix())` 回退块同步覆盖弹窗遮罩层。
+
+### Tests
+- 客户端契约测试新增 portal 契约断言：`react-dom` 必被解析、`createPortal(node, document.body)`、顶层 `z-index`、共享变量选择器。
+
 ## [0.4.2] - 2026-11-16
 
 ### Fixed

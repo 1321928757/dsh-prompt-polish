@@ -38,12 +38,22 @@ const React = {
   useRef: (initial) => ({ current: initial }),
   Fragment: 'Fragment',
 }
+const requestedSpecifiers = []
 const materialized = bootEntries[0].factory((specifier) => {
+  requestedSpecifiers.push(specifier)
   if (specifier === 'react') return React
+  if (specifier === 'react-dom') return { createPortal: (node, container) => ({ type: 'PORTAL', container, children: [node] }) }
   throw new Error(`client bundle required an unresolved specifier: ${specifier}`)
 })
 assert.deepEqual(materialized.inject, ['remote'])
 assert.equal(typeof materialized.apply, 'function')
+// 完整设置弹窗必须经 createPortal 挂到 body：留在输入栏子树里会被宿主容器
+// 裁切并被输入栏遮挡（0.4.2 上实见）。react-dom 解析失败时才回退为就地渲染。
+assert.ok(requestedSpecifiers.includes('react-dom'), 'client bundle should resolve react-dom for the settings dialog portal')
+assert.match(source, /createPortal\(node, document\.body\)/)
+assert.match(source, /dialogOpen \? renderInTopLayer\(React\.createElement\(/)
+assert.match(source, /\.dyn-opt-dialog-backdrop\s*\{[\s\S]*?z-index:2147483000/)
+assert.match(source, /\.dyn-opt-root, \.dyn-opt-dialog-backdrop\s*\{[\s\S]*?--pp-modal-surface:/)
 assert.match(source, /\.dyn-opt-dialog\s*\{[\s\S]*?background:var\(--pp-modal-surface, var\(--dsw-alias-bg-layer-2, #fff\)\)/)
 assert.match(source, /\.dyn-opt-dialog-body\s*\{[\s\S]*?background:var\(--pp-modal-surface, var\(--dsw-alias-bg-layer-2, #fff\)\)/)
 assert.match(source, /\.dyn-opt-dialog-foot\s*\{[\s\S]*?background:var\(--pp-modal-footer, var\(--pp-modal-surface, #fff\)\)/)
